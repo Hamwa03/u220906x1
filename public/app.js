@@ -20,6 +20,8 @@ function build() {
     titleSett.innerHTML = 'Settings'
     divSett.appendChild(titleSett);
 
+    const hideShowButton = document.createElement('button');
+
     calculatorWindow(divCalc);
 
     settingsWindow(divSett);
@@ -39,21 +41,45 @@ function calculatorWindow(divCalc) {
     buttonAddition.setAttribute('id', 'btnAddition');
     divCalc.appendChild(buttonAddition);
     buttonAddition.innerText = "+";
+    buttonAddition.onclick = () => {
+        textArea.append(numberInput1.value + " + " + numberInput2.value + " = " + (Number(numberInput1.value) + Number(numberInput2.value)) + "\n");
+    };
 
     const buttonSubtraction = document.createElement('button');
     buttonSubtraction.setAttribute('id', 'btnSubtraction');
     divCalc.appendChild(buttonSubtraction);
     buttonSubtraction.innerText = "-";
+    buttonSubtraction.onclick = () => {
+        textArea.append(numberInput1.value + " - " + numberInput2.value + " = " + (Number(numberInput1.value) - Number(numberInput2.value)) + "\n");
+    };
 
     const buttonMultiplication = document.createElement('button');
     buttonMultiplication.setAttribute('id', 'btnMultiplication');
     divCalc.appendChild(buttonMultiplication);
     buttonMultiplication.innerText = "*";
+    buttonMultiplication.onclick = () => {
+        textArea.append(numberInput1.value + " * " + numberInput2.value + " = " + (Number(numberInput1.value) * Number(numberInput2.value)) + "\n");
+    };
 
     const buttonDivision = document.createElement('button');
     buttonDivision.setAttribute('id', 'btnDivision');
     divCalc.appendChild(buttonDivision);
     buttonDivision.innerText = "/";
+    buttonDivision.onclick = () => {
+        textArea.append(numberInput1.value + " / " + numberInput2.value + " = " + (Number(numberInput1.value) / Number(numberInput2.value)) + "\n");
+    };
+
+    const textArea = document.createElement('textarea');
+    textArea.setAttribute('id', 'textArea');
+    textArea.disabled = true;
+    divCalc.appendChild(textArea);
+
+    const buttonClear = document.createElement('button');
+    buttonClear.setAttribute('id', 'btnClear');
+    buttonClear.innerText = "Clear";
+    buttonClear.onclick = () => textArea.innerHTML = '';
+    divCalc.appendChild(buttonClear);
+
 }
 
 function createOption(value, divSett) {
@@ -65,20 +91,28 @@ function createOption(value, divSett) {
 
 function settingsWindow(divSett) {
     
-    const dropDown1 = document.createElement('select');
-    dropDown1.setAttribute('id', 'dropDown1');
-    divSett.appendChild(dropDown1);
+    const dropDownColor = document.createElement('select');
+    dropDownColor.setAttribute('id', 'dropDown1');
+    divSett.appendChild(dropDownColor);
 
-    createOption("Light", dropDown1);
-    createOption("Dark", dropDown1);
-    createOption("Blue", dropDown1);
+    createOption("Light", dropDownColor);
+    createOption("Dark", dropDownColor);
+    createOption("Blue", dropDownColor);
 
-    const dropDown2 = document.createElement('select');
-    dropDown2.setAttribute('id', 'dropDown2');
-    divSett.appendChild(dropDown2);
+    const dropDownSize = document.createElement('select');
+    dropDownSize.setAttribute('id', 'dropDown2');
+    divSett.appendChild(dropDownSize);
 
-    createOption("Small", dropDown2);
-    createOption("Medium", dropDown2);
-    createOption("Large", dropDown2);
+    createOption("Small", dropDownSize);
+    createOption("Medium", dropDownSize);
+    createOption("Large", dropDownSize);
+
+    dropDownColor.onchange = (event) => {
+        document.body.className = event.target.value.toLowerCase();
+    };
+
+    dropDownSize.onchange = (event) => {
+        textArea.className = event.target.value.toLowerCase();
+    }
 
 }
