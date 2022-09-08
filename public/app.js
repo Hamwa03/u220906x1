@@ -1,7 +1,6 @@
 console.log('I am alive...');
 
 build();
-calculatorWindow();
 
 function build() {
 
@@ -22,6 +21,8 @@ function build() {
     divSett.appendChild(titleSett);
 
     calculatorWindow(divCalc);
+
+    settingsWindow(divSett);
 }
 
 function calculatorWindow(divCalc) {
@@ -53,4 +54,31 @@ function calculatorWindow(divCalc) {
     buttonDivision.setAttribute('id', 'btnDivision');
     divCalc.appendChild(buttonDivision);
     buttonDivision.innerText = "/";
+}
+
+function createOption(value, divSett) {
+    const optionTag = document.createElement('option');
+    optionTag.setAttribute('value', value);
+    optionTag.innerHTML = value;
+    divSett.appendChild(optionTag);
+}
+
+function settingsWindow(divSett) {
+    
+    const dropDown1 = document.createElement('select');
+    dropDown1.setAttribute('id', 'dropDown1');
+    divSett.appendChild(dropDown1);
+
+    createOption("Light", dropDown1);
+    createOption("Dark", dropDown1);
+    createOption("Blue", dropDown1);
+
+    const dropDown2 = document.createElement('select');
+    dropDown2.setAttribute('id', 'dropDown2');
+    divSett.appendChild(dropDown2);
+
+    createOption("Small", dropDown2);
+    createOption("Medium", dropDown2);
+    createOption("Large", dropDown2);
+
 }
