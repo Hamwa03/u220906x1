@@ -21,6 +21,9 @@ function build() {
     divSett.appendChild(titleSett);
 
     const hideShowButton = document.createElement('button');
+    hideShowButton.innerText = 'Settings';
+    hideShowButton.onclick = () => divSett.hidden = !divSett.hidden;
+    app.appendChild(hideShowButton);
 
     calculatorWindow(divCalc);
 
